@@ -1,0 +1,146 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+
+
+{% block contenidoQueCambia %}
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" style="font-size:20px;background-color:#00AEEF;color:black;" type="button" data-toggle="dropdown">Seleccionar Tecnico
+    <span class="caret"></span> </button>
+    <ul class="dropdown-menu">
+        {% for nombre in name %}
+      <li><a href="{% url 'verTecnico' nombre.name %}">{{ nombre.name }}</a></li>
+      {% endfor %}   
+    </ul>
+  </div>
+<p></p>
+<p></p>
+<p></p>
+
+
+
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #DDD;
+    }
+    
+    tr:hover {background-color: #D6EEEE;}
+    </style>
+
+    <h1 style="background-color:#00AEEF;color:black">{{ nombre }}</h1>
+    <h2 style="background-color:#00AEEF;color:black" >Consumo Cable:  {{ cable }}</h2> 
+    
+
+
+
+
+
+    <h4 class="float-child" style="font-size:18px;"><p>Agregar consumo de Cable </p>
+        <form action="" method="GET"> 
+         <input type="number" name="consumo_cables" id="consumo_cables">
+         <input type="submit" value="Agregar" style="background-color:#00AEEF;color:black"></input>
+        </form>
+        </h4>
+    </div>
+    
+    <h4 class="float-child" style="font-size:18px;"><p>Agregar Seriado Bobina RG6</p>
+        <form action="" method="GET"> 
+        <input type="text" name="agrega_cable" id="agrega_cable"></input>
+        <input type="submit" value="Agregar" style="background-color:#00AEEF;color:black"></input>
+        </form>
+        </h4>
+         
+    <style>
+    
+    .flex-container {
+        display: flex;
+    }
+    .float-child {
+        width: 50%;
+        float: left;
+        padding: 20px;
+        border: 2px solid black;
+        background: white;
+    }  
+    .flex-child:first-child {
+        margin-right: 20px;
+    } 
+    </style>   
+    
+    <h2 style="background-color:#00AEEF;color:black">Equipos Instalados:</h2> 
+    {% for data in equipos %}
+    <table style="max-width:100%;height:auto;">  
+    <th style="font-size:18px;background-color:#00afef3f">Equipo instalado</th>
+    <th style="font-size:18px;background-color:#00afef3f">mac instalado</th>
+    <th style="font-size:18px;background-color:#00afef3f">Equipo Desinstalado</th>
+    <th style="font-size:18px;background-color:#00afef3f">mac Desinstalado</th>
+    <th style="font-size:18px;background-color:#00afef3f">VT</th>
+    <th style="font-size:18px;background-color:#00afef3f">CLIENTE</th>
+
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        * {
+  box-sizing: border-box;
+}
+
+.column {
+  padding: 5px;
+}
+table {
+  width: 50%;
+}
+tr,
+td {
+  width: 10%;
+  text-align: center;
+  padding: 1px;
+  margin-bottom: 1px;
+  font-size: 14px;
+}
+
+
+        </style>
+        <body>
+        
+
+
+    <tr>
+        <td>{{ data.equipo_instalado }}</td>
+        <td>{{ data.mac_instalado }}</td>
+        <td>{{ data.equipo_desinstalado }}</td>
+        <td>{{ data.mac_desinstalado }}</td>
+        <td>{{ data.numero_vt }}</td>
+        <td>{{ data.numero_cliente }}</td>
+    </tr>
+      
+</table>
+{% endfor %}
+<h2 style="background-color:#00AEEF;color:black">Stock:</h2> 
+{% for data in stock %}
+<table style="max-width:100%;height:auto;">  
+  <th style="font-size:18px;background-color:#00afef3f">nombre_equipo</th>
+  <th style="font-size:18px;background-color:#00afef3f">seriado</th>
+  <tr>
+    <td>{{ data.nombre_equipo }}</td>
+    <td>{{ data.seriado }}</td>
+  </tr>
+  {% endfor %}
+
+{% if formulario.errors %}
+       <p style="color:red">Hay algo mal</p>
+    {% endif %}
+
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "templates/index.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+
+<h3 style="font-size:20px;background-color:#00AEEF;color:black;">Agregar Equipos No Operativos</h3>
+{% if formulario.errors %}
+   <p style="color:red;font-size:20px">Hay algo mal</p>
+{% endif %}
+{% autoescape off %} 
+<form method="POST" enctype="multipart/form-data" style="font-size:20px;color:black;padding: auto;;"> {% csrf_token %}
+    <table style="font-size:20px;color:black;grid-area: auto;">
+        {{ formulario.as_table  }}
+    </table>
+    <input type="submit" value="Enviar"style="font-size:20px;background-color:#00AEEF;color:black;" >
+    <style>textarea {
+      width: 250px;
+      height: 150px;
+      float: left;
+    }</style>
+</form>
+
+{% endautoescape %}
+
+{% endblock %}

@@ -1,0 +1,271 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+
+
+{% block contenidoQueCambia %}
+
+<div class="dropdown" style="font-size:20px;background-color:#00AEEF">
+  <a class="bi bi-arrow-left-short btn-lg" style="font-size:20px;background-color:#00AEEF;color:black;float:center;border:1px solid black;margin-top:auto;margin-bottom:10px" href="{% url 'verTecnico' anterior %}"></a>
+  <a class="bi bi-arrow-right-short btn-lg" style="font-size:20px;background-color:#00AEEF;color:black;float:center;border:1px solid black;margin-top:auto;margin-bottom: auto;" href="{% url 'verTecnico' siguiente %}"></a>
+    <button class="btn btn-primary dropdown-toggle" style="font-size:20px;background-color:#00AEEF;color:black;border:1px solid black" type="button" data-toggle="dropdown">{{ nombre }}
+    <span class="caret"></span> </button>
+    <ul class="dropdown-menu">
+      {% for nombre in name %}
+      <li><a style="color:black;" href="{% url 'verTecnico' nombre.name %}">{{ nombre.name }}</a></li>
+      {% endfor %}   
+    </ul>
+    <a style="font-size:20px;background-color:#00AEEF;color:black;"> Consumo Cable:  {{ cable }}</a>
+    
+    <a><form action=""method="GET">
+      <label for="valor">FECHA:</label>
+      <input type="date" id="valor_data" name="valor_data">
+      <input type="submit">
+    </form></a>
+  </div>
+<p></p>
+<p></p>
+<p></p>
+<style>
+    
+  .flex-container {
+      display: flex;
+      align-items: center;
+  }
+  .float-child {
+      width: 50%;
+      float: center;
+      padding: 20px;
+      border: 1px solid black;
+      background: white;
+  }  
+  .flex-child:first-child {
+      margin-right: 20px;
+  } 
+  </style>   
+  
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .row {
+      display: flex;
+      margin-left:-5px;
+      margin-right:-5px;
+    }
+    
+    .column {
+      flex: 50%;
+      padding: 5px;
+    }
+    
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid rgb(0, 0, 0);
+      align-items: center;
+      
+    }
+    
+    th, td, h2 {
+      text-align: center;
+      padding: 16px;
+      font-size:18px;
+      border:1px solid black;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    </style>
+
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid black;
+  }
+  
+  tr:hover {background-color: #D6EEEE;}
+  </style>
+ 
+
+
+
+
+
+
+  <div class="row">
+    <div class="column" >
+      <table>
+        <h2 style="background-color:#00AEEF;color:black">Cable:</h2> 
+        <tr>
+          <th><h4 style="font-size:18px;"><p>Agregar consumo de Cable </p>
+            <form action="" method="GET"> 
+             <input type="number" name="consumo_cables" id="consumo_cables">
+             <input type="submit" value="Agregar" style="background-color:#00AEEF;color:black"></input>
+            </form>
+            </h4></th>
+          <th><h4 style="font-size:18px;"><p>Agregar Seriado Bobina RG6</p>
+            <form action="" method="GET"> 
+            <input type="text" name="agrega_cable" id="agrega_cable"></input>
+            <input type="submit" value="Agregar" style="background-color:#00AEEF;color:black"></input>
+            </form>
+            </h4></th>
+        </tr>
+        {% for data in equipos %}
+      
+        {% endfor %}
+      </table>
+    </div>
+    <div class="column">
+      <table>
+        <h2 style="background-color:#00AEEF;color:black">Descuentos:</h2> 
+        <tr>
+          <th>Equipo</th>
+          <th>Mac</th>
+          <th>VT</th>
+          <th>Cliente</th>
+        </tr>
+        
+
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+   
+      </table>
+    </div>
+  </div>
+       
+  <style>
+  
+  .flex-container {
+      display: flex;
+  }
+  .float-child {
+      width: 50%;
+      float: left;
+      padding: 20px;
+      border: 2px solid black;
+      background: white;
+  }  
+  .flex-child:first-child {
+      margin-right: 20px;
+  } 
+  </style>   
+         
+ 
+  </head>
+      <body>
+      
+      <div class="row">
+        <div class="column">
+          <table>
+            <h2 style="background-color:#00AEEF;color:black">Equipos Instalados:</h2> 
+            <tr>
+              <th>Equipos Instalado</th>
+              <th>mac instalado</th>
+              <th>Equipo Desinstalado</th>
+              <th>mac Desinstalado</th>
+              <th>VT</th>
+              <th>CLIENTE</th>
+            </tr>
+            {% for data in equipos %}
+            <tr>
+              <td>{{ data.equipo_instalado }}</td>
+              <td>{{ data.mac_instalado }}</td>
+              <td>{{ data.equipo_desinstalado }}</td>
+              <td>{{ data.mac_desinstalado }}</td>
+              <td>{{ data.numero_vt }}</td>
+              <td>{{ data.numero_cliente }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="column">
+          <table>
+            <h2 style="background-color:#00AEEF;color:black">Stock:</h2> 
+            <thead>
+
+            <tr>
+              <th>Deco Cisco</th>
+              <th>Deco Sagem</th>
+              <th>4K 362</th>
+              <th>4K 387</th>
+              <th>Alexa</th>
+              <th>Modem 2.0</th>
+              <th>Modem 3.0</th>
+              <th>Modem 3.1</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              {% for cisco in equipos_dcisco %}
+              <td>{{ cisco.seriado }}</td>
+              {% endfor %}
+
+              {% for sagem in equipos_dsagem %}
+              <td>{{ sagem.seriado }}</td>
+              {% endfor %}
+
+              {% for data in equipos_4k362 %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+
+              {% for data in equipos_4k387 %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+
+              {% for data in equipos_alexa %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+
+              {% for data in equipos_2_0 %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+
+              {% for data in equipos_3_0 %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+
+              {%  for data in equipos_3_1  %}
+              <td>{{ data.seriado }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+          </table>
+        
+        
+
+
+        </div>
+      </div>
+      <h3 style="font-size:20px;background-color:#00AEEF;color:black;">Agregar Equipos</h3>
+      {% if formulario.errors %}
+         <p style="color:red;font-size:20px">Hay algo mal</p>
+      {% endif %}
+      
+      <form method="POST" enctype="multipart/form-data" style="font-size:20px;color:black;padding: auto;;"> {% csrf_token %}
+          <table style="font-size:20px;color:black;grid-area: auto;">
+              {{ formulario.as_table  }}
+          </table>
+          <input type="submit" value="Enviar" >
+      </form>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,295 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+
+
+{% block contenidoQueCambia %}
+
+<div class="dropdown" style="font-size:20px;background-color:#00AEEF">
+  <a class="bi bi-arrow-left-short btn-lg" style="font-size:20px;background-color:#00AEEF;color:black;float:center;border:1px solid black;margin-top:auto;margin-bottom:10px" href="{% url 'verTecnico' anterior %}"></a>
+  <a class="bi bi-arrow-right-short btn-lg" style="font-size:20px;background-color:#00AEEF;color:black;float:center;border:1px solid black;margin-top:auto;margin-bottom: auto;" href="{% url 'verTecnico' siguiente %}"></a>
+    <button class="btn btn-primary dropdown-toggle" style="font-size:20px;background-color:#00AEEF;color:black;border:1px solid black" type="button" data-toggle="dropdown">{{ nombre }}
+    <span class="caret"></span> </button>
+    <ul class="dropdown-menu">
+      {% for nombre in name %}
+      <li><a style="color:black;" href="{% url 'verTecnico' nombre.name %}">{{ nombre.name }}</a></li>
+      {% endfor %}   
+    </ul>
+
+    <a style="font-size:20px;background-color:#00AEEF;color:black;"> Consumo Cable: {{ cable_bobina }}</a>
+
+    <a><form action=""method="GET">
+      <label for="valor">FECHA:</label>
+      <input  type="date" id="valor_data" name="valor_data">
+      <input type="submit">
+    </form></a>
+  </div>
+
+<p></p>
+<p></p>
+<p></p>
+<style>
+    
+  .flex-container {
+      display: flex;
+      align-items: center;
+  }
+  .float-child {
+      width: 50%;
+      float: center;
+      padding: 20px;
+      border: 1px solid black;
+      background: white;
+  }  
+  .flex-child:first-child {
+      margin-right: 20px;
+  } 
+  </style>   
+  
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .row {
+      display: flex;
+      margin-left:-5px;
+      margin-right:-5px;
+    }
+    
+    .column {
+      flex: 50%;
+      padding: 5px;
+    }
+    
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid rgb(0, 0, 0);
+      align-items: center;
+      
+    }
+    
+    th, td, h2 {
+      text-align: center;
+      padding: 16px;
+      font-size:18px;
+      border:1px solid black;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    </style>
+
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid black;
+  }
+  
+  tr:hover {background-color: #D6EEEE;}
+  </style>
+ 
+
+
+
+
+
+
+  <div class="row">
+    <div class="column" >
+      <table>
+        <h2 style="background-color:#00AEEF;color:black">Cable:</h2> 
+        <tr>
+          <th><h4 style="font-size:18px;" ><p>Agregar consumo de Cable </p>
+            <form method="POST" enctype="multipart/form-data" style="font-size:20px;color:black;padding: auto;;"> {% csrf_token %}
+              <table >
+                  {{ form2  }}
+              </table>
+              <input type="submit" value="Enviar"style="font-size:20px;background-color:#00AEEF;color:black;" >
+    
+          </form>
+            </h4></th>
+          <th><h4 style="font-size:18px;"><p>Agregar Seriado Bobina RG6</p>
+            <form method="POST" enctype="multipart/form-data" style="font-size:20px;color:black;padding: auto;;"> {% csrf_token %}
+              <table >
+                  {{ form3  }}
+              </table>
+              <input type="submit" value="Enviar"style="font-size:20px;background-color:#00AEEF;color:black;" >
+    
+          </form>
+            </h4></th>
+        </tr>
+      
+      </table>
+    </div>
+    <div class="column">
+      <table>
+        <h2 style="background-color:#00AEEF;color:black">Descuentos:</h2> 
+        <tr>
+          <td>EQUIPO</td>
+          <td>MAC</td>
+          <td>VT</td>
+          <td>CLIENTE</td>
+          <td>ESTADO</td>
+      </tr>
+        
+        
+        {% for data in descu %}
+        <tr>
+          <td>{{ data.equipo }}</td>
+          <td>{{ data.mac }}</td>
+          <td>{{ data.vt }}</td>
+          <td>{{ data.cliente }}</td>
+          <td>{{ data.estado }}</td>
+        </tr>
+        {% endfor %}
+   
+      </table>
+    </div>
+  </div>
+       
+  <style>
+  
+  .flex-container {
+      display: flex;
+  }
+  .float-child {
+      width: 50%;
+      float: left;
+      padding: 20px;
+      border: 2px solid black;
+      background: white;
+  }  
+  .flex-child:first-child {
+      margin-right: 20px;
+  } 
+  </style>   
+         
+ 
+  </head>
+      <body>
+      
+      <div class="row">
+        <div class="column">
+          <table>
+            <h2 style="background-color:#00AEEF;color:black">Equipos Instalados:</h2> 
+            <tr>
+              <th>Equipos Instalado</th>
+              <th>mac instalado</th>
+              <th>Equipo Desinstalado</th>
+              <th>mac Desinstalado</th>
+              <th>VT</th>
+              <th>CLIENTE</th>
+            </tr>
+            {% for data in equipos %}
+            <tr>
+              <td>{{ data.equipo_instalado }}</td>
+              <td>{{ data.mac_instalado }}</td>
+              <td>{{ data.equipo_desinstalado }}</td>
+              <td>{{ data.mac_desinstalado }}</td>
+              <td>{{ data.numero_vt }}</td>
+              <td>{{ data.numero_cliente }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="column">
+          <div class="row">
+            <div class="column" >
+              <table>
+                <h2 style="background-color:#00AEEF;color:black">stock:</h2> 
+                <tr>
+                  <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>Deco cisco</p></h4></th>
+                <tr>
+                {% for cisco in equipos_dcisco %}
+              <td style="border-top-width:3px;">{{ cisco.seriado }}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>Deco Sagem</p></h4></th>
+            <tr>
+            {% for sagem in equipos_dsagem %}
+          <td style="border-top-width:3px;">{{ sagem.seriado }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>4K 362</p></h4></th>
+        <tr>
+        {% for 4k362 in equipos_4k362 %}
+      <td style="border-top-width:3px;">{{ 4k362.seriado }}</td>
+      {% endfor %}
+    </tr>
+    <tr>
+      <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>4K 387</p></h4></th>
+    <tr>
+    {% for 4k387 in equipos_4k387 %}
+  <td style="border-top-width:3px;">{{ 4k387.seriado }}</td>
+  {% endfor %}
+</tr>
+<tr>
+  <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>Alexa</p></h4></th>
+<tr>
+{% for alexa in equipos_alexa %}
+<td style="border-top-width:3px;">{{ alexa.seriado }}</td>
+{% endfor %}
+</tr>
+<tr>
+  <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>Modem 2.0</p></h4></th>
+<tr>
+{% for modem2_0 in equipos_2_0 %}
+<td style="border-top-width:3px;">{{ modem2_0.seriado }}</td>
+{% endfor %}
+</tr>
+<tr>
+  <th><h4 style="font-size:18px;background-color:#00AEEF;color:black,"><p>Modem 3.0</p></h4></th>
+<tr>
+{% for modem3_0 in equipos_3_0 %}
+<td style="border-top-width:3px;">{{ modem3_0.seriado }}</td>
+{% endfor %}
+</tr>
+<tr>
+  <th><h4 style="font-size:18px;background-color:#00AEEF;color:black">Modem 3.1</h4></th>
+<tr>
+{% for modem3_1 in equipos_3_1 %}
+<td style="border-top-width:3px;">{{ modem3_1.seriado }}</td>
+{% endfor %}
+</tr>
+          </table>
+          
+          </div>
+      </div>
+      </div>
+      <h3 style="font-size:20px;background-color:#00AEEF;color:black;">Agregar Equipos</h3>
+      {% if formulario.errors %}
+         <p style="color:red;font-size:20px">Hay algo mal</p>
+      {% endif %}
+      {% autoescape off %} 
+      <form method="POST" enctype="multipart/form-data" style="font-size:20px;color:black;padding: auto;;"> {% csrf_token %}
+          <table style="font-size:20px;color:black;grid-area: auto;">
+              {{ formulario.as_table  }}
+          </table>
+          <input type="submit" value="Enviar"style="font-size:20px;background-color:#00AEEF;color:black;" >
+          <style>textarea {
+            width: 250px;
+            height: 150px;
+            float: left;
+          }</style>
+      </form>
+    
+      {% endautoescape %}.
+</body>
+</html>
+
+{% endblock %}
